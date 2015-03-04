@@ -1,0 +1,9 @@
+---
+## PLAYBOOK TO INSTALL AND CONFIGURE MYSQL DB ON REDHAT/ DEBIAN SYSTEMS
+
+- hosts: all
+  roles:
+     - mysql
+
+
+

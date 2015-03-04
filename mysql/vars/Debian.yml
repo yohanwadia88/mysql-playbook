@@ -1,0 +1,17 @@
+---
+
+# Debian based distribution Variables
+mysql_package:
+   - mysql-server
+   - python-mysqldb
+
+mysql_service: mysql
+
+mysql_conf_path: /etc/mysql/my.cnf
+
+mysql_datadir: /var/lib/mysql
+mysql_socket: /var/lib/mysqld/mysqld.sock
+mysql_log: /var/log/mysql/error.log
+mysql_pid: /var/run/mysqld/mysqld.pid
+
+

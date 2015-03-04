@@ -1,0 +1,26 @@
+
+---
+# tasks file for mysql
+
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Create Mysql configuration file
+  template: src=my.cnf.j2 dest={{ mysql_conf_path }}
+
+- name: Start Mysql Service
+  service: name={{ mysql_service }} state=started enabled=yes
+
+- name: Create dummy Database
+  mysql_db: name={{ dbname }} state=present
+
+- name: Create dummy Database User
+  mysql_user: name="{{ dbuser }}" password="{{ dbpassword }}" priv=*.*:ALL host='%' state=present
+
+

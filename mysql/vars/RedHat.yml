@@ -1,0 +1,17 @@
+---
+
+# RedHat distribution based Variables
+mysql_package:
+   - mysql-server
+   - MySQL-python
+
+mysql_service: mysqld
+
+mysql_conf_path: /etc/my.cnf
+
+mysql_datadir: /var/lib/mysql
+mysql_socket: /var/lib/mysql/mysql.sock 
+mysql_log: /var/log/mysqld.log 
+mysql_pid: /var/run/mysqld/mysqld.pid
+
+

@@ -1,0 +1,13 @@
+[mysqld]
+datadir={{ mysql_datadir }}
+socket={{ mysql_socket }}
+
+user=mysql
+symbolic-links=0
+port={{ mysql_port }}
+
+[mysqld_safe]
+log-error={{ mysql_log }}
+pid-file={{ mysql_pid }}
+
+
