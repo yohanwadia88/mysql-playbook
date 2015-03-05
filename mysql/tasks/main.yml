@@ -17,10 +17,26 @@
 - name: Start Mysql Service
   service: name={{ mysql_service }} state=started enabled=yes
 
+- name: Remove anonymous MySQL users
+  action: mysql_user user="" host="{{ item }}" state="absent"
+  with_items:
+   - "{{ ansible_hostname }}"
+   - "{{ ansible_fqdn }}"
+
+- name: Secure MySQL installation / change root user password
+  mysql_user: login_user=root
+              login_password=''
+              name=root
+              password={{ MySQLPass | mandatory }}
+              priv=*.*:ALL,GRANT
+              host={{ item }}
+  with_items:
+        - "{{ ansible_hostname }}"
+        - "{{ ansible_fqdn }}"
+        - 127.0.0.1
+        - ::1
+        - localhost
+
 - name: Create dummy Database
-  mysql_db: name={{ dbname }} state=present
-
-- name: Create dummy Database User
-  mysql_user: name="{{ dbuser }}" password="{{ dbpassword }}" priv=*.*:ALL host='%' state=present
-
+  mysql_db: name={{ dbname }} login_user=root login_password={{ MySQLPass }} state=present
 
