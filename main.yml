@@ -1,9 +1,13 @@
 ---
 ## PLAYBOOK TO INSTALL AND CONFIGURE MYSQL DB ON REDHAT/ DEBIAN SYSTEMS
 
-- hosts: all
-  roles:
-     - mysql
+    - hosts: all
+       vars_prompt:
+        - name: "MySQLPass"
+          prompt: "Enter MySQL root password"
+          private: yes
+       roles:
+        - mysql
 
 
 
