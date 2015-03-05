@@ -15,6 +15,7 @@ Role Variables
 
 OS specific variables are defined in /vars/{{ ansible_os_family }}.yml files.
 Default variables are defined in /defaults/main.yml
+On execution, the playbook will prompt the user to enter the MySQL root password.
 
 Dependencies
 ------------
@@ -24,9 +25,16 @@ None
 Example Playbook
 ----------------
 
-    - hosts: all
-      roles:
-         - mysql
+     - hosts: all
+       vars_prompt:
+        - name: "MySQLPass"
+          prompt: "Enter MySQL root password"
+          private: yes
+       roles:
+        - mysql
+
+
+
 
 License
 -------
