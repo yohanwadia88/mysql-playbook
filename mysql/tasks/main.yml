@@ -11,10 +11,10 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Create Mysql configuration file
+- name: Create MySQL configuration file
   template: src=my.cnf.j2 dest={{ mysql_conf_path }}
 
-- name: Start Mysql Service
+- name: Start MySQL Service
   service: name={{ mysql_service }} state=started enabled=yes
 
 - name: Remove anonymous MySQL users
