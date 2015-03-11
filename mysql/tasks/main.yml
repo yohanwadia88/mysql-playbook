@@ -11,10 +11,10 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Create MySQL configuration file
-  template: src=my.cnf.j2 dest={{ mysql_conf_path }}
+- name: Create Mysql configuration file
+  template: src="my.cnf.{{ ansible_os_family }}.j2" dest={{ mysql_conf_path }}
 
-- name: Start MySQL Service
+- name: Start Mysql Service
   service: name={{ mysql_service }} state=started enabled=yes
 
 - name: Remove anonymous MySQL users
@@ -22,6 +22,7 @@
   with_items:
    - "{{ ansible_hostname }}"
    - "{{ ansible_fqdn }}"
+   - localhost
 
 - name: Secure MySQL installation / change root user password
   mysql_user: login_user=root
@@ -33,10 +34,10 @@
   with_items:
         - "{{ ansible_hostname }}"
         - "{{ ansible_fqdn }}"
+        - "%"
         - 127.0.0.1
         - ::1
         - localhost
 
-- name: Create dummy Database
-  mysql_db: name={{ dbname }} login_user=root login_password={{ MySQLPass }} state=present
-
+- name: Restart Mysql Service
+  service: name={{ mysql_service }} state=restarted
