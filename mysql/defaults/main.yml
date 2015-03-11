@@ -2,8 +2,6 @@
 # defaults file for mysql
 
 mysql_port: 3306
-dbuser: cloud
-dbname: testdb
-dbpassword: test
+
 
 
