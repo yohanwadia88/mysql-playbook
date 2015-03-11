@@ -30,6 +30,8 @@ Example Playbook
         - name: "MySQLPass"
           prompt: "Enter MySQL root password"
           private: yes
+          default: "P@$$w0rd"
+
        roles:
         - mysql
 
